@@ -1,0 +1,66 @@
+# 프로그래머스 - 표 편집 문제
+
+from collections import deque
+
+class Node: #양방향 링크드리스트
+    def __init__(self):
+        self.prev = -1 # 이전 노드
+        self.next = -1 # 다음 노드
+        self.is_delete = False # 삭제 여부
+
+def solution(n, k, cmd):
+    # 링크드리스트 초기화
+    node_list = [Node() for _ in range(n)]
+    for i in range(n-1):
+        node_list[i].next = i + 1
+        node_list[i + 1].prev = i
+       
+    Z = deque() # 삭제된 노드 저장 스택
+    point = k # 현재 선택된 칸
+    
+    for c in cmd:
+        
+        if len(c)>1:
+            c, siz = c.split()
+            siz = int(siz)
+        
+        if c == "U":
+            for i in range(siz):
+                point = node_list[point].prev
+        elif c == "D":
+            for i in range(siz):
+                point = node_list[point].next
+                
+        elif c == "C":
+            node_list[point].is_delete = True
+            Z.append(point)
+            
+            prev_node = node_list[point].prev
+            next_node = node_list[point].next
+            
+            if prev_node != -1: #이전 노드가 있는 경우
+                node_list[prev_node].next = next_node
+            if next_node != -1:
+                node_list[next_node].prev = prev_node
+                point = next_node
+            else: #다음 노드가 없으면 이전 노드 포인트
+                point = prev_node
+                
+        elif c == "Z": 
+            del_node = Z.pop()
+            node_list[del_node].is_delete = False
+            
+            prev_node = node_list[del_node].prev
+            next_node = node_list[del_node].next
+            
+            if prev_node != -1: #이전 노드가 있는 경우
+                node_list[prev_node].next = del_node
+            if next_node != -1:
+                node_list[next_node].prev = del_node
+
+        answer = ''
+        for i in range(n):
+            if node_list[i].is_delete: answer += "X"
+            else: answer += "O"
+        
+    return answer
