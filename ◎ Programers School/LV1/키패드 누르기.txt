@@ -1,0 +1,44 @@
+def solution(numbers, hand):
+    answer = ''
+    phone = [[1,4,7,'*'], [2,5,8,0], [3,6,9,'#']]
+    left = '*'
+    right = '#'
+    
+    for i in numbers:
+        if i in phone[0]:
+            left = i
+            answer += 'L'
+        elif i in phone[2]:
+            right = i
+            answer += 'R'
+        else:
+            mid = phone[1].index(i)
+            mm = 0
+            if left in [1,4,7,'*']:
+                lef = phone[0].index(left)
+                ll = abs(mid-lef)+1
+            else: 
+                lef = phone[1].index(left)
+                ll = abs(mid-lef)
+            if right in [3,6,9,'#']:
+                rig = phone[2].index(right)
+                rr = abs(mid-rig)+1
+            else:
+                rig = phone[1].index(right)
+                rr = abs(mid-rig)
+            
+            if ll == rr:
+                if hand == 'right':
+                    answer += 'R'
+                    right = i
+                else: 
+                    answer += 'L'
+                    left = i
+            elif ll < rr: #왼쪽이 가까움
+                answer += 'L'
+                left = i
+            else:
+                answer += 'R'
+                right = i
+    
+    return answer

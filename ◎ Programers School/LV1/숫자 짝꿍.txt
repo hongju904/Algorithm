@@ -1,0 +1,21 @@
+def solution(X, Y):
+    answer = ''
+    
+    x, y = [0 for i in range(10)], [0 for i in range(10)]
+    
+    for i in X:
+        x[int(i)] += 1
+    for i in Y:
+        y[int(i)] += 1
+    
+    for i in range(len(x)):
+        j = 9-i
+        for k in range(min(x[j], y[j])):
+            answer = answer + str(j)
+    
+    if answer == "": answer = "-1"
+    if int(answer) == 0: answer = "0"
+    
+    return answer
+
+# 효율성 통과X

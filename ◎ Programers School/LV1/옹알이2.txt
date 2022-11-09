@@ -1,0 +1,19 @@
+def solution(babbling):
+    
+    sol = ["aya", "ye", "woo", "ma"]
+    x = ["ayaaya", "yeye", "woowoo", "mama"]
+    answer = 0
+    
+    for i in range(len(babbling)):
+        for j in range(4):
+            if x[j] in babbling[i]:
+                break
+            else:
+                if sol[j] in babbling[i]:
+                    babbling[i] = babbling[i].replace(sol[j], " ")
+        
+        babbling[i] = babbling[i].strip()
+        if babbling[i] == "":
+            answer += 1 
+        
+    return answer

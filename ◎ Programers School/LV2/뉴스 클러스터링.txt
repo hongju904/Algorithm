@@ -1,0 +1,40 @@
+# 5:38
+
+def solution(str1, str2):
+    
+    str1 = str1.upper()
+    str2 = str2.upper()
+    lis1, lis2 = [], []
+    
+    for i in range(len(str1)-1):
+        tmp = str1[i:i+2]
+        if tmp.isalpha():
+            lis1.append(tmp)
+            
+    for i in range(len(str2)-1):
+        tmp = str2[i:i+2]
+        if tmp.isalpha():
+            lis2.append(tmp)
+    
+    ANB = set(lis1) & set(lis2)
+    AUB = set(lis1) | set(lis2)
+    
+    
+    ANB_list = []
+    for i in ANB:
+        for j in range(min( lis1.count(i),lis2.count(i) )):
+            ANB_list.append(i)
+    AUB_list = []
+    for i in AUB:
+        for j in range(max( lis1.count(i),lis2.count(i) )):
+            AUB_list.append(i)
+    
+    if AUB_list == []:
+        answer = 65536
+    elif ANB_list == []:
+        answer = 0
+    else:
+        J = len(ANB_list) / len(AUB_list)
+        answer = int(J * 65536)
+    
+    return answer

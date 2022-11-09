@@ -1,0 +1,32 @@
+def solution(dartResult):
+    # 영역: S(1제곱)/D(2)/T(3)
+    # 옵션: *(해당&최근1건 점수 2배, 첫번째에서는 자신만)/#(해당 점수 마이너스)
+    answer = 0
+    
+    pre = 0 #이전값
+    tmp = 0 #현재값
+    
+    for i in range(len(dartResult)):
+        k = dartResult[i]
+
+        if k.isdigit() == True:
+            if (dartResult[i-1].isdigit() == True):
+                tmp = tmp*10 + int(k)
+            else:             
+                answer += tmp
+                pre = int(tmp)
+                tmp = int(k)
+            
+        if k == 'D':
+            tmp = tmp**2
+        elif k == 'T':
+            tmp = tmp**3
+        elif k == '*':
+            tmp = tmp * 2
+            answer += pre
+        elif k == '#':
+            tmp = -tmp
+        
+    answer += tmp
+    
+    return answer

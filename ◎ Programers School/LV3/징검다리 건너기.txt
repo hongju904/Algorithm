@@ -1,0 +1,26 @@
+def solution(stones, k):
+    answer = 0 # 건넌 친구 수
+
+    minst = min(stones)
+    maxst = max(stones) 
+
+    while minst <= maxst:
+        mid = (minst + maxst) // 2
+        nul = 0
+
+        for i in stones:
+            if nul < k:
+                if i <= mid:
+                    nul += 1
+                else: 
+                    nul = 0
+            else:
+                break
+        if nul >= k:
+            answer = mid
+            maxst = mid - 1
+        else: minst = mid + 1
+
+    
+   
+    return answer

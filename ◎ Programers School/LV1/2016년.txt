@@ -1,0 +1,15 @@
+def solution(a, b):  
+    month = [31, 29, 31, 30, 31, 30, 
+             31, 31, 30, 31, 30, 31]
+    # 2월 1일일 경우 31일이 흘러간것
+    sum = 0
+    for i in range(a-1):
+        sum += month[i]
+    sum += (b-1)
+    sum += 5
+    
+    result = ['SUN','MON','TUE','WED','THU','FRI','SAT']
+    
+    answer = result[sum%7]
+    
+    return answer

@@ -1,0 +1,38 @@
+def solution(id_list, report, k):
+    dic1 = {}    # 1 : 무지
+    dic2 = {}   # 무지 : 1
+
+    p = len(id_list)
+    r = len(report)
+    
+    tmp = 0
+    for i in id_list:
+        dic1[i] = str(tmp)
+        dic2[tmp] = i
+        tmp += 1    #각 사용자를 번호로 관리
+    
+    lis = []
+    for i in report:
+        tmp = i.split(' ')
+        tmp2 = ''
+        tmp2 += dic1[tmp[0]]
+        tmp2 += dic1[tmp[1]]
+        lis.append(tmp2) #신고한사람과 신고된사람이 번호로 저장 ex.14
+    
+    lis = list(set(lis)) # 중복 제거 후 다시 리스트
+    lis2 = [0 for i in range(p)]   
+
+    for i in range(len(lis)):
+        lis2[ int(lis[i][1]) ] += 1
+
+    answer = [0 for i in range(p)]   
+    for i in range(p):
+        if lis2[i] >= k:
+            for j in range(r):
+                if i == int(lis[j][1]):
+                    answer[ int(lis[j][0]) ] += 1
+
+    return answer
+
+
+# 정확성 테스트 미통과

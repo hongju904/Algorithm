@@ -1,0 +1,20 @@
+def solution(board, moves):
+    # 같은 모양이 2개 연속이면 사라진다
+    # 사라진 인형 개수 구하기
+    answer = 0
+    box = []
+    
+    for i in moves:
+        k = i - 1
+        for j in range(len(board)):
+            if board[j][k] != 0:
+                box.append(board[j][k])
+                board[j][k] = 0
+                break
+        
+        if (len(box)>=2) and (box[-1] == box[-2]):
+            box.pop()
+            box.pop()
+            answer += 2
+            
+    return answer

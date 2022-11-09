@@ -1,0 +1,20 @@
+def solution(n, lost, reserve):
+    # 전체n / 도난당한lost / 여벌옷reserve
+    
+    lost2 = set(lost) - set(reserve)    #도난o 여벌x
+    reserve2 = set(reserve) - set(lost) #도난x 여벌o
+    
+    lost = list(lost2)
+    reserve = list(reserve2)
+    answer = n - len(lost)
+    
+    
+    for i in lost:
+        if (i-1 in reserve):
+            answer += 1
+            reserve.remove(i-1)
+        elif (i+1 in reserve):
+            answer += 1
+            reserve.remove(i+1)
+    
+    return answer

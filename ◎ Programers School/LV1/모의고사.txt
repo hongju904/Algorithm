@@ -1,0 +1,11 @@
+def solution(nums):
+    tmp = set(nums)
+    max1 = len(tmp)
+    max2 = int(len(nums)/2)
+    
+    if max1 >= max2:
+        answer = max2
+    else:
+        answer = max1
+    
+    return answer

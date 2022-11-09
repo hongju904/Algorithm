@@ -1,0 +1,29 @@
+def solution(lottos, win_nums):
+    # 로또번호 lottos / 당첨번호 win_nums
+    
+    lot = set(lottos)
+    win = set(win_nums)
+    
+    x = lot - win   #틀린숫자(set)
+    o = 0           #맞은숫자(int)
+    zero = 0
+    
+    for i in lottos:
+        if i == 0:
+            zero += 1
+        elif i not in x:
+            o += 1
+    
+    # 최소숫자 o, 최대숫자 o+zero
+    
+    s1 = 7-(o+zero)
+    s2 = 7-(o)
+    
+    if s1 < 1: s1 = 1
+    elif s1 > 6: s1 = 6
+    
+    if s2 > 6: s2 = 6
+    elif s2 <1: s2 = 1
+    
+    answer = [s1, s2]
+    return answer

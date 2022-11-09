@@ -1,0 +1,11 @@
+def solution(a, b, n):
+    # 빈병a개->새b병 / 갖고있는 병n개
+    
+    coke = 0
+    
+    while (n)/a >= 1:
+        coke += (n//a)*b # 가진 n개를 a로 나눈 몫(횟수) * b병
+        n = n%a + (n//a)*b #바꾸고 남은 빈병 + 새로받은 b병
+    
+    answer = coke
+    return answer

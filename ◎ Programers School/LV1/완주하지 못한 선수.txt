@@ -1,0 +1,22 @@
+def solution(participant, completion):
+    # 마라톤 참여 / 완주
+    # 완주 못한 이름 return
+    # 동명이인 있을 수 있음
+    
+    who = {}
+    
+    for i in participant:
+        if i in who:
+            who[i] = who[i]+1
+        else:
+            who[i] = 1
+        
+    for i in completion:
+        who[i] = who[i] - 1
+
+    for j in who:
+        if who[j] == 1:
+            answer = j
+            break
+
+    return answer
