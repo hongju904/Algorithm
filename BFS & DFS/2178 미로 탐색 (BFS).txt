@@ -1,0 +1,22 @@
+N, M = map(int, input().split())
+maze = []
+
+dx = [1,-1,0,0]
+dy = [0,0,-1,1]
+
+for i in range(N):
+    maze.append(list(input()))
+    
+queue=[[0,0]]
+maze[0][0] = 1
+
+while queue:
+    a, b = queue[0][0], queue[0][1] # 현재위치 maze[a][b]
+    del queue[0] # 새로운 현재위치 찾기
+    for i in range(4): 
+        x = a+dx[i] # 상하좌우 위치에 존재하는 1 찾아 최소거리 구하기
+        y = b+dy[i]
+        if (0 <= x < N) and (0 <= y < M) and (maze[x][y] == "1"):
+            queue.append([x,y])
+            maze[x][y] = maze[a][b] + 1
+print(maze[N-1][M-1])

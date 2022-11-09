@@ -1,0 +1,12 @@
+n = int(input())
+student = [0 for i in range(n)]
+for i in range(n):
+    student[i] = int(input())
+
+student.sort()
+result = 0
+i = 1
+for i in range(n):
+    result += abs(student[i] - (i+1))
+
+print(result)

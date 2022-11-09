@@ -1,0 +1,27 @@
+# 위상정렬 적용
+import sys
+from collections import deque
+input = sys.stdin.readline
+
+N, M = map(int, input().split())
+stu = [[] for i in range(N+1)]        #stu에는 자신보다 작은 학생 저장할 리스트
+degree = [0 for i in range(N+1)]      #degree에는 비교당한 횟수(키가 더 작다)
+que = deque()
+
+for i in range(M):
+    high, low = map(int, input().split())
+    stu[high].append(low)           #high가 low를 참조한다고 생각, 참조횟수가 0인 정점부터 위상정렬
+    degree[low] += 1
+
+for i in range(1, N+1):
+    if degree[i] == 0:              #자신보다 큰 친구를 만난적 없음 -> 큐
+        que.append(i)
+
+while que:
+    node = que.popleft()            #참조횟수가 적은 - 가장 큰 학생 먼저 pop(제거) 후 출력
+    print(node, end=' ')
+
+    for i in stu[node]:             #node에 저장된 비교대상자들 degree를 1씩 내린다 (자신보다 큰 학생 사라짐)
+        degree[i] -= 1
+        if degree[i] == 0:          #값이 0이 되면 큐에 들어간다 (가장 큰 상태 됨)
+            que.append(i)

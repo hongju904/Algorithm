@@ -1,0 +1,21 @@
+K, N = map(int, input().split())    # 갖고있는 개수 K, 필요한 개수 N
+
+length = [0 for i in range(K)]
+for i in range(K):  # 갖고있는 랜선 길이
+    length[i] = int(input())
+
+start, end = 1, max(length)
+
+while start <= end:
+    mid = (start+end)//2
+    lan = 0
+
+    for i in length:
+        lan += i // mid
+    
+    if lan >= N:
+        start = mid + 1
+    else:
+        end = mid - 1
+
+print(end)

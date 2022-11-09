@@ -1,0 +1,18 @@
+N = int(input()) # 잔 개수
+
+cup = [0 for _ in range(N)]
+for n in range(N):
+    cup[n] = int(input())
+dp = [0 for _ in range(N)]
+
+dp[0] = cup[0]
+if N > 1:
+    dp[1] = cup[0] + cup[1]
+if N > 2:
+    dp[2] = max( dp[1], cup[1]+cup[2], cup[0]+cup[2] )
+
+for i in range(3,N):
+    dp[i] = max( dp[i-1], cup[i]+cup[i-1]+dp[i-3], cup[i]+dp[i-2] ) #순서대로 i번째 안먹기, 이전거랑 같이먹기, 2번째 전이랑 같이먹기
+
+print(dp[n-1])
+    

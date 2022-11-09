@@ -1,0 +1,24 @@
+N = int(input())
+result = 0
+go = []
+while N >= 1:
+    go.append(N)
+    if N % 3 == 0:
+        N = N // 3
+        result += 1
+    # elif N % 4 == 0 and :
+    #     N = N // 2
+    #     result += 1
+    elif N % 3 == 1:
+        N -=1
+        result += 1
+    elif N % 2 == 0:
+        N = N // 2
+        result += 1
+    else:
+        N -=1
+        result += 1
+
+print(result - 1)
+for i in go:
+    print(i, end=' ')

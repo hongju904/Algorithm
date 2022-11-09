@@ -1,0 +1,20 @@
+# 2행 n열 스티커, 점수의 합이 최대가 되면서 서로 변을 공유하지 않는 스티커 집합 찾기
+T = int(input()) # 테스트 횟수
+
+for i in range(T):
+    N = int(input()) # 열 개수
+    lis = [[0]*N for _ in range(2)]
+
+    for j in range(2):
+        lis[j] = list( map(int, input().split()) )
+    # 숫자로 변환 완료
+
+    if N != 1:
+        lis[0][1] += lis[1][0]
+        lis[1][1] += lis[0][0]
+
+        for row in range(2,N):
+            for col in range(2):
+                lis[col][row] += max( lis[1-col][row-1], lis[1-col][row-2] )
+
+    print(max( map(max, lis) ))

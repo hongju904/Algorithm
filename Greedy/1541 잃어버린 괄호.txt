@@ -1,0 +1,33 @@
+IN = input()
+
+tmp = ''
+stack = ''
+flag = 0    #앞에 - 없었음
+flag2 = 1   #0 나올수없는 상태
+
+for i in IN:
+    if i == '-':
+        tmp += stack
+        stack = ''
+        flag2 = 1
+        if flag == 0:
+            tmp += '-('
+            flag = 1
+        else:
+            tmp += ')-('
+    elif i == '+':
+        tmp += stack
+        stack = ''
+        tmp += '+'
+        flag2 = 1
+    else:
+        if (i == '0') and (flag2 == 1):
+            continue
+        else:
+            tmp += i
+            flag2 = 0
+
+if flag == 1:
+    tmp += ')'
+
+print(eval(tmp))

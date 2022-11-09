@@ -1,0 +1,13 @@
+n = int(input())
+student = input().split()
+
+for i in range(n*2):
+    student[i] = int(student[i])
+
+team = [0 for i in range(n)]
+for i in range(n):
+    team[i] = max(student) + min(student)
+    student.remove(max(student))
+    student.remove(min(student))
+
+print(min(team))
