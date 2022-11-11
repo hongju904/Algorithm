@@ -1,0 +1,19 @@
+N = int(input())
+
+num = [0 for _ in range(N)]
+dp = [0 for _ in range(N)]
+for i in range(N):
+    num[i] = int(input())
+
+dp[0] = num[0]
+
+if N>1:
+    dp[1] = num[0] + num[1]
+if N>2:
+    dp[2] = max(num[0]+num[2], num[1]+num[2])
+
+for i in range(3,N):
+    dp[i] = max(dp[i-3]+num[i-1]+num[i], dp[i-2]+num[i])
+
+
+print(dp[-1])

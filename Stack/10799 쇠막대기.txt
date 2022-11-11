@@ -1,0 +1,16 @@
+lis = input()
+
+stack = [] # 현재 막대 수
+result = 0
+for i in range(len(lis)):
+    if lis[i] == '(':
+        stack.append(i)
+    else: 
+        if i-1 == stack[-1]: # 레이저
+            stack.pop()
+            result += len(stack)
+        else: # 막대의 끝
+            stack.pop()
+            result += 1
+
+print(result)

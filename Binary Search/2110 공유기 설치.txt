@@ -1,0 +1,35 @@
+N, C = map(int, input().split())
+
+house = [0 for _ in range(N)]
+for i in range(N):
+    house[i] = int(input())
+
+house.sort()
+left = 1
+right = house[-1] - house[0]
+
+result = 0
+
+if C == 2:
+    result = right
+
+while left <= right:
+    mid = (left+right)//2
+    wifi = 1 # 설치 개수
+    pre_far = house[0] # 이전 공유기
+    far = [] # 공유기 간 최소 거리
+    for i in range(1,N):
+        if house[i]-pre_far >= mid: # 설정한 거리이거나 그것보다 커지면 현위치에 설치
+           # print(house[i], pre_far, mid, "/", left, right, mid)
+            wifi += 1
+            far.append(house[i]-pre_far)
+            pre_far = house[i]
+            
+            
+    if wifi < C:
+        right = mid - 1
+    else:
+        result = min(far)
+        left = mid + 1
+
+print(result)

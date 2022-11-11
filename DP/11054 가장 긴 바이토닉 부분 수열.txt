@@ -1,0 +1,22 @@
+N = int(input())
+
+num = list(map(int, input().split()))
+
+dp1 = [1 for _ in range(N)]
+dp2 = [1 for _ in range(N)]
+
+for i in range(1,N):
+    for j in range(i):
+        if num[i] > num[j]:
+            dp1[i] = max( dp1[j]+1, dp1[i] ) # 증가하는중
+
+for i in range(N-2,-1,-1):
+    for j in range(N-1,i,-1):
+        if num[i] > num[j]:
+            dp2[i] = max( dp2[j]+1, dp2[i] ) # 감소하는중
+
+sum = [0 for _ in range(N)]
+for i in range(N):
+    sum[i] = dp1[i] + dp2[i]
+
+print(max(sum)-1)

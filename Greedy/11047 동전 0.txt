@@ -1,0 +1,14 @@
+N, K = map(int, input().split())
+
+coin = [0 for _ in range(N)]
+for i in range(N):
+    coin[i] = int(input())
+
+count = 0
+
+for i in range(N):
+    count += K // coin[-(i+1)]
+    K = K % coin[-(i+1)]
+    #print(K, count)
+
+print(count)

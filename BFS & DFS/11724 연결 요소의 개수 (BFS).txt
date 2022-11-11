@@ -1,0 +1,30 @@
+from collections import deque
+N, M = map(int, input().split())
+
+graph = [[]for i in range(N+1)]
+
+for i in range(M):
+    u, v = map(int, input().split())
+    graph[u].append(v)
+    graph[v].append(u)
+# 간선 등록
+
+def bfs(graph, start, visited):
+    Q = deque([start])
+    visited[start] = True
+    while Q:
+        v = Q.popleft()
+        for i in graph[v]:
+            if visited[i] == False:
+                Q.append(i)
+                visited[i] = True
+
+visited = [False for i in range(N+1)]
+count = 0
+
+for v in range(1, N+1):
+    if visited[v] == False:
+        bfs(graph, v, visited)
+        count += 1
+
+print(count)
