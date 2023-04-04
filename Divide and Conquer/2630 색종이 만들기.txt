@@ -1,0 +1,31 @@
+N = int(input())
+
+paper = [[0]*N for _ in range(N)]
+for i in range(N):
+    paper[i] = list(map(int, input().split()))
+
+white = 0
+blue = 0
+
+def cutting(x,y,n):
+    global white, blue
+
+    color = paper[x][y]
+    for i in range(x, x+n):
+        for j in range(y, y+n):
+            if color != paper[i][j]: # 다른 색 발견시 커팅
+                cut = n//2
+                cutting(x,y,cut)
+                cutting(x+cut,y,cut)
+                cutting(x,y+cut,cut)
+                cutting(x+cut,y+cut,cut)
+                return # 커팅 후 종료
+    # 커팅하지 않고 끝났다면
+    if color == 1:
+        blue += 1
+    else:
+        white += 1
+
+cutting(0,0,N)
+print(white)
+print(blue)

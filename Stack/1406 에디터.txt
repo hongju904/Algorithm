@@ -1,0 +1,25 @@
+word = input()
+N = len(word)
+
+stack1 = ['' for _ in range(N)]
+stack2 = []
+for i in range(N):
+    stack1[i] = word[i]
+
+M = int(input())
+
+for m in range(M):
+    now = input()
+    if now[0] == 'L':
+        if stack1 != []:
+            stack2.append(stack1.pop())
+    elif now[0] == 'D':
+        if stack2 != []:
+            stack1.append(stack2.pop())
+    elif now[0] == 'B':
+        if stack1 != []:
+            stack1.pop()
+    else:
+        stack1.append(now[-1])
+        
+print(''.join(stack1 + list(reversed(stack2))))
